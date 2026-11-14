@@ -49,7 +49,8 @@ Download links, sizes and SHA-256 sums: see [`artifacts/README.md`](artifacts/RE
 ### Option A — flash a prebuilt image (no building)
 
 ```bash
-# 1. verify what you downloaded
+# 1. decompress and verify what you downloaded
+xz -d super-lin22-signed.img.xz
 sha256sum super-lin22-signed.img            # compare with artifacts/README.md
 
 # 2. unlock (once) — confirm the prompt on-screen with VOLUME UP within ~20s
@@ -72,17 +73,22 @@ Prerequisites: Linux x86_64, Docker, **≥64 GB RAM**, **≥400 GB free SSD** (t
 Total time ≈ 2–3 hours, mostly unattended.
 
 ```bash
+scripts/00-extract-oem.sh /path/to/OEM/images/super.img   # keep vendor/product/system_b
 scripts/01-build-toolchain.sh    # build the ubuntu:24.04 builder image
 scripts/02-sync-source.sh        # repo init/sync lineage-22.2 (~180 GB)
-scripts/03-build.sh              # lunch + make systemimage (~2 h)
-scripts/05-package-super.sh      # patch identity + assemble super.img
+scripts/03-build.sh              # apply the GSI patch set + make systemimage (~2 h)
+scripts/05-package-super.sh      # identity patch + assemble super.img
+scripts/06-flash.sh super-lin22-signed.img
 ```
 
-Optional, for a shareable `release-keys` image:
+Step 00 matters: the OEM `vendor` partition is **not** distributed here — every user extracts it from
+their own firmware package, which is also what makes this publishable at all.
+
+Optional, for a shareable `release-keys` image (this also generates the signing keys; run it before
+step 05):
 
 ```bash
-scripts/make-certs.sh            # generate the 123 signing keys (once)
-scripts/04-sign.sh               # target-files + otatools + sign_target_files.sh
+scripts/04-sign.sh               # keys + target-files + otatools + sign_target_files.sh (~30 min)
 ```
 
 The build environment is documented in
