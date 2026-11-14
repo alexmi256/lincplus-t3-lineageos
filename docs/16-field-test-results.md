@@ -15,7 +15,7 @@ Unit: test unit (8/128 GB, `T3_US`), bootloader unlocked, flashed with a full us
 | Camera — front | ✅ works | Preview + stills |
 | Video recording | ✅ works | Records; playback verified |
 | Audio — speaker | ✅ works | Media playback fine |
-| Bluetooth | 🟡 partial | Device list populates; no pairing/audio test performed yet |
+| Bluetooth | ✅ works | Paired with a Bluetooth speaker; playback confirmed |
 | Brightness | 🟡 partial | Slider responds, but the **lower third of the range barely changes brightness**. Enabling the brightness options in GSI settings (Phh Treble Settings) did **not** make it dimmer |
 | Widevine | ✅ L1 | SysID 29739, HDCP 2.3, 50 sessions, measured via DRM Info |
 
@@ -35,11 +35,11 @@ future GSI exposes one.
 
 ## Not yet tested
 
-Video recording has since been verified, so the gap list is now:
+Video recording and Bluetooth pairing have since been verified, so the gap list is now:
 
-- Headphone jack / USB-C audio, microphone
+- USB-C audio output and microphone — note this tablet has **no 3.5 mm jack**, so there is no wired
+  analogue output to test
 - Sensors (accelerometer, gyroscope, light, proximity) and auto-rotate
-- **Bluetooth pairing / A2DP** — discovery works, connection never tested
 - Hardware video decode, MTP/USB file transfer
 - Encryption full cycle, battery idle drain, Play Protect certification
 

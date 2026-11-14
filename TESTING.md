@@ -51,7 +51,7 @@ adb shell dumpsys bluetooth_manager | head -20
 ## 3. Audio
 
 - [ ] Speaker playback (music/video)
-- [ ] Headphone jack (if the unit has one) and USB-C audio
+- [ ] USB-C audio output — this tablet has **no 3.5 mm jack**, so wired analogue audio is not testable
 - [ ] Microphone records (voice recorder app)
 - [ ] Volume keys adjust the right stream
 - [ ] No crackle/pops at low volume

@@ -130,9 +130,9 @@ device reports.
 | **Camera — rear and front** | ✅ verified (preview + stills) |
 | **Video recording** | ✅ verified |
 | **Audio — speaker** | ✅ verified |
-| **Bluetooth** | 🟡 enumerates nearby devices; pairing / A2DP audio not yet confirmed |
+| **Bluetooth** | ✅ verified (paired with a speaker, audio playback worked) |
 | **Brightness** | 🟡 slider works, but the **lower third has little or no effect** — `GSI settings` brightness tweaks did not change it |
-| Audio — headphone jack, USB-C, mic | ⚠️ untested |
+| Audio — USB-C output, microphone | ⚠️ untested (there is **no 3.5 mm jack** on this tablet) |
 | Sensors: accelerometer, gyro, light, proximity | ⚠️ untested |
 | Auto-rotate | ⚠️ untested |
 | Hardware video decode (H.264/HEVC/VP9) | ⚠️ untested — codec list reported by the build looks complete |
