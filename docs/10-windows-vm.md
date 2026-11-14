@@ -1,14 +1,14 @@
 # Windows VM — built, and where it stands
 
 Answer to `09-windows-vm-brief.md` §11. The working stack lives outside this
-repository, in **`/opt/data/projects/mtk-win-vm/`** (it contains a 40 GB VM disk,
+repository, in **`/path/to/mtk-win-vm/`** (it contains a 40 GB VM disk,
 a 6 GB Windows ISO and the vendor binaries, none of which belong in git). Its
 `README.md` is the operating manual; this file is the handback.
 
 ## 1. The container, and where the disk lives
 
 `dockur/windows` (v6.06 image) with QEMU 11.1.1, Windows 10 Pro 19045 installed
-unattended, driven by `/opt/data/projects/mtk-win-vm/compose.yml`.
+unattended, driven by `/path/to/mtk-win-vm/compose.yml`.
 
 | | |
 |---|---|
@@ -61,7 +61,7 @@ Worked as the brief hoped, with one correction and one caveat.
 the preloader appears is built and proven, and the readback itself is a command:
 
 ```bash
-cd /opt/data/projects/mtk-win-vm
+cd /path/to/mtk-win-vm
 python3 tools/readback.py --partitions persist --wait 60     # then power-cycle the tablet
 python3 tools/readback.py --all                              # remaining 10 partitions
 ```

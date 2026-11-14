@@ -88,11 +88,11 @@ Scripted in `build/patch-gsi-identity.sh <system.img> [brand] [device] [build_id
 
 ```bash
 # 1. patch identity into the GSI's system image
-docker run --rm -v /flashcache/hermes/projects/Lincplu.T3.Update:/work debian:bookworm \
+docker run --rm -v /path/to/project:/work debian:bookworm \
   bash /work/build/patch-gsi-identity.sh /work/build/lineage-stockid.img
 
 # 2. assemble super (system_a = patched GSI, rest = OEM stock)
-docker run --rm -v /flashcache/hermes/projects/Lincplu.T3.Update:/work \
+docker run --rm -v /path/to/project:/work \
   lincplus-android-tools:5 bash /work/build/make-super-stockid.sh
 
 # 3. flash

@@ -122,26 +122,24 @@ Consequences for the VM:
 | USB access | device is on host bus 3 (`Bus 003 ... 0e8d:XXXX`); needs `--privileged` plus `-v /dev/bus/usb:/dev/bus/usb`, or explicit `usbfs` cgroup rules |
 | Display | none. Use VNC + noVNC/web or a websocket VNC client |
 | Windows media | **the user must supply a Windows ISO.** Do not assume a licence; do not download Windows from unofficial mirrors. A ~20 GB virtual disk is plenty |
-| Persistence | put the VM disk on a mounted volume so a container rebuild does not lose the installed guest — see `/opt/data` ↔ `/flashcache/hermes` (same directory, two paths) |
+| Persistence | put the VM disk on a mounted volume, so a container rebuild does not lose the installed guest |
 
-**adb access from a container.** adb authorisation is per **key**, not per host: a fresh
-container generates its own key and the tablet reports `unauthorized`. A key the tablet already
-trusts exists on this host at `/opt/data/.android/adbkey` (copied from the REA container, which
-the tablet was originally paired with), and is mounted into the tools container as
-`/root/.android`. To reproduce it elsewhere:
+**adb access from a container.** adb authorisation is per **key**, not per host: a fresh container
+generates its own key and the tablet reports `unauthorized`. Two ways to deal with it:
 
 ```bash
-docker cp rea-agent-ghidra:/home/rea/.android/adbkey     /opt/data/.android/adbkey
-docker cp rea-agent-ghidra:/home/rea/.android/adbkey.pub /opt/data/.android/adbkey.pub
-chmod 600 /opt/data/.android/adbkey
+# A. reuse an already-authorised key: mount a directory containing adbkey + adbkey.pub
+docker run ... -v ~/.android:/root/.android ...
+
+# B. let the container generate one and accept the prompt on the device
+adb keygen /root/.android/adbkey
+adb devices        # tap "Allow" on the tablet, tick "always allow"
 ```
 
-Note: that key is **deliberately kept outside this repository and is not reproduced in this
-document**. These docs are written to be published, and a private key pasted into a public repo
-hands anyone adb access to the owner's tablet. The path plus the commands above are the quick
-reference; the key material itself stays in `/opt/data/.android` with mode 0600. Also, only one
-adb server may hold the USB interface at a time — run `adb kill-server` in the REA container
-before using the tools container.
+Note: **never commit `adbkey` / `adbkey.pub` to a repository.** A private key in a public repo hands
+anyone adb access to the owner's tablet. Keep it in `~/.android` with mode `0600`. Also, only one
+adb server may hold the USB interface at a time — run `adb kill-server` in any other container using
+the same device first.
 
 **Recommended starting point:** rather than hand-rolling QEMU, evaluate
 [`dockur/windows`](https://github.com/dockur/windows) — it already handles ISO retrieval,
