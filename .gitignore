@@ -1,0 +1,131 @@
+# ---------------------------------------------------------------------------
+# Nothing in here is source. Everything listed is either huge, personal,
+# unit-specific, or a build artefact that can be regenerated.
+# If you find yourself wanting to commit one of these, add it to a Release
+# asset instead (see artifacts/README.md).
+# ---------------------------------------------------------------------------
+
+# --- Firmware and vendor tooling (multi-GB, not ours to redistribute) ------
+FW/
+Tool/
+*.tar.md5
+*.ofp
+*.ozip
+*.mbn
+*.scatter
+
+# --- Unit-specific backups: NEVER publish -----------------------------------
+# persist/nvram/nvdi contain keys unique to one physical device. Publishing
+# or restoring these across units is unrecoverable.
+backup/
+readback*/
+physical-readback/
+*.bak
+persist.img
+nvram.img
+nvdi.img
+nvdata.img
+proinfo.img
+seccfg.img
+protect1.img
+protect2.img
+nvcfg.img
+otp.img
+
+# --- Images and archives ----------------------------------------------------
+*.img
+*.img.gz
+*.img.xz
+*.img.zst
+super*.img
+*.bin
+*.sparse
+*.zip
+*.7z
+*.rar
+
+# --- Build trees and outputs ------------------------------------------------
+build/
+out/
+work/
+lineage*/
+.repo/
+target_files/
+signed-target_files.zip
+
+# --- Logs and diagnostics ---------------------------------------------------
+*.log
+logcat*
+dmesg*
+last_kmsg*
+bugreport*
+*.trace
+*.perfetto
+perf.data
+
+# --- Screenshots / photos / recordings --------------------------------------
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.bmp
+*.mp4
+*.mkv
+*.wav
+*.mp3
+!docs/**/*.png
+
+# --- APKs / APEX / split payloads (third-party, do not redistribute) --------
+*.apk
+*.apks
+*.apex
+*.capex
+*.xapk
+drminfo*/
+drminfo-apks/
+
+# --- Signing material: NEVER publish ----------------------------------------
+# Private keys. Losing control of these means anyone can sign "your" builds.
+*.pk8
+*.pem
+*.x509.pem
+*.jks
+*.keystore
+*.p12
+.android-certs/
+vendor/lineage-priv/
+keys/
+avb_custom_key.bin
+
+# --- Credentials and environment -------------------------------------------
+.env
+.env.*
+secrets*
+*askpass*
+*.secret
+*.token
+*.netrc
+.git-credentials
+id_rsa*
+id_ed25519*
+authorized_keys
+known_hosts
+
+# --- Editor / OS cruft ------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*~
+.cache/
+tmp/
+
+# --- Python / misc tooling --------------------------------------------------
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+node_modules/
