@@ -19,7 +19,7 @@
 # Verify any size you take from lpdump against a real extracted file before trusting it.
 #
 # Run inside lincplus-android-tools image with the project at /work:
-#   docker run --rm -v /flashcache/hermes/projects/Lincplu.T3.Update:/work \
+#   docker run --rm -v /path/to/project:/work \
 #     lincplus-android-tools:5 bash /work/build/make-super.sh
 
 set -euo pipefail

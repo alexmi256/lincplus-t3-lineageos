@@ -27,7 +27,7 @@
 #   Lincplus / T3_US / TP1A.220624.014 / 20241016
 #
 # Run inside a container with e2fsprogs:
-#   docker run --rm -v /flashcache/hermes/projects/Lincplu.T3.Update:/work debian:bookworm \
+#   docker run --rm -v /path/to/project:/work debian:bookworm \
 #     bash /work/build/patch-gsi-identity.sh /work/build/lineage-stockid.img
 
 set -euo pipefail
