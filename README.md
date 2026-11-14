@@ -128,10 +128,10 @@ device reports.
 | DRM Info, screenshots, launcher, setup wizard | ✅ verified |
 | **Wi-Fi** | ✅ verified (connects, stable) |
 | **Camera — rear and front** | ✅ verified (preview + stills) |
+| **Video recording** | ✅ verified |
 | **Audio — speaker** | ✅ verified |
 | **Bluetooth** | 🟡 enumerates nearby devices; pairing / A2DP audio not yet confirmed |
 | **Brightness** | 🟡 slider works, but the **lower third has little or no effect** — `GSI settings` brightness tweaks did not change it |
-| Video recording | ⚠️ untested |
 | Audio — headphone jack, USB-C, mic | ⚠️ untested |
 | Sensors: accelerometer, gyro, light, proximity | ⚠️ untested |
 | Auto-rotate | ⚠️ untested |

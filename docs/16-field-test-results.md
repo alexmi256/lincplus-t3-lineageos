@@ -13,6 +13,7 @@ Unit: test unit (8/128 GB, `T3_US`), bootloader unlocked, flashed with a full us
 | Wi-Fi | ✅ works | Connects and stays connected |
 | Camera — rear | ✅ works | Preview + stills |
 | Camera — front | ✅ works | Preview + stills |
+| Video recording | ✅ works | Records; playback verified |
 | Audio — speaker | ✅ works | Media playback fine |
 | Bluetooth | 🟡 partial | Device list populates; no pairing/audio test performed yet |
 | Brightness | 🟡 partial | Slider responds, but the **lower third of the range barely changes brightness**. Enabling the brightness options in GSI settings (Phh Treble Settings) did **not** make it dimmer |
@@ -34,9 +35,13 @@ future GSI exposes one.
 
 ## Not yet tested
 
-Video recording, headphone jack / USB-C audio, microphone, sensors (accelerometer, gyroscope, light,
-proximity), auto-rotate, hardware video decode, MTP/USB file transfer, encryption full cycle, battery
-idle drain, Play Protect certification.
+Video recording has since been verified, so the gap list is now:
+
+- Headphone jack / USB-C audio, microphone
+- Sensors (accelerometer, gyroscope, light, proximity) and auto-rotate
+- **Bluetooth pairing / A2DP** — discovery works, connection never tested
+- Hardware video decode, MTP/USB file transfer
+- Encryption full cycle, battery idle drain, Play Protect certification
 
 If you have a unit, run [`TESTING.md`](../TESTING.md) and open an issue — every row that moves is
 useful.
