@@ -171,13 +171,13 @@ prints the flags. Always round-trip through it.
 **Symptom.** `adb pull /system/etc/security/otacerts.zip devdump/` → `cannot create file/
 directory: No such file or directory`, even though `devdump/` existed on the host.
 
-**Cause.** `adb` runs inside the `existing-container` container, whose filesystem is not the
+**Cause.** `adb` runs inside the `android-tools` container, whose filesystem is not the
 host's. Relative paths resolve against the container's cwd.
 
 **Resolution.** Stream it out instead:
 
 ```bash
-docker exec existing-container adb exec-out cat /system/etc/security/otacerts.zip > devdump/otacerts.zip
+docker exec android-tools adb exec-out cat /system/etc/security/otacerts.zip > devdump/otacerts.zip
 ```
 
 ---
@@ -666,7 +666,7 @@ change tools rather than retrying the same path.
 ## F28 — adb trust is per key, so a new container starts `unauthorized`
 
 **Symptom.** `adb devices` inside the tools container showed `SERIAL-DAILY unauthorized`,
-while the same tablet showed `device` inside the another container.
+while the same tablet showed `device` inside the other container.
 
 **Cause.** Android's adb authorisation is a trust relationship with a specific **RSA key**
 (stored on the device in `/data/misc/adb/adb_keys`), not with the host or the container. Each
@@ -676,8 +676,8 @@ hence the `Allow USB debugging?` prompt, which a headless container can never an
 **Resolution.** Reuse the key the tablet already trusts instead of trying to authorise a new one:
 
 ```bash
-docker cp existing-container:/home/rea/.android/adbkey     ~/.android/adbkey
-docker cp existing-container:/home/rea/.android/adbkey.pub ~/.android/adbkey.pub
+docker cp android-tools:/root/.android/adbkey     ~/.android/adbkey
+docker cp android-tools:/root/.android/adbkey.pub ~/.android/adbkey.pub
 chmod 600 ~/.android/adbkey
 ```
 
@@ -689,7 +689,7 @@ Two constraints worth recording:
 - **The key is private.** It lives at `~/.android`, *outside* the project tree, so it
   cannot end up in the publishable documentation. Never copy it into the repo.
 - **Only one adb server may hold the USB interface.** With both containers' adb daemons alive
-  they fight over the device; `adb kill-server` in the another container first. This is also why a
+  they fight over the device; `adb kill-server` in the other container first. This is also why a
   persistent `android-tools` container (kept up with `sleep infinity`, driven via
   `work/at.sh`) is better than `docker run --rm` per command — one long-lived server, no churn.
 

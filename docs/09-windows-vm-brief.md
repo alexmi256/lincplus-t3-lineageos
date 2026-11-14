@@ -259,7 +259,7 @@ any device appears. Proton is Wine plus Steam scaffolding and has no advantage h
 ### D. Reimplement the SLA handshake — real work, but not absurd
 
 We hold `SLA_Challenge.dll` and a complete firmware package, and this project already has a
-reverse-engineering container (REA: Ghidra, radare2, Frida). The DLL is small. If its
+reverse-engineering container (Ghidra, radare2, Frida). The DLL is small. If its
 challenge/response is self-contained crypto, a Linux implementation of the SLA step could unlock
 the readback path without Windows.
 
