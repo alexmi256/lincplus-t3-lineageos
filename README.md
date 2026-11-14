@@ -22,6 +22,10 @@ impossible (keeping Widevine L1 on a GSI).
 Both include GApps (Play Store present), run on the stock vendor partition, and keep the bootloader
 unlock's `orange` verified-boot state.
 
+**Maturity:** both are fresh builds. A14 was run for about a day before the A15 work took over, so
+neither has months of uptime behind it — see [`docs/16-field-test-results.md`](docs/16-field-test-results.md)
+for exactly what has been tested and when.
+
 Download links, sizes and SHA-256 sums: see [`artifacts/README.md`](artifacts/README.md).
 
 ---
@@ -116,20 +120,35 @@ device reports.
 | `ro.build.tags=release-keys`, self-signed system | ✅ verified |
 | Security patch 2026-11-01 | ✅ verified |
 | DRM Info, screenshots, launcher, setup wizard | ✅ verified |
-| Wi-Fi | ⚠️ untested (connectivity is core to the GSI, expected fine) |
-| Bluetooth, BLE | ⚠️ untested |
-| Audio: speakers, headphone jack, mic | ⚠️ untested |
-| Cameras (front/rear) | ⚠️ untested — MTK camera HALs are the usual weak spot |
+| **Wi-Fi** | ✅ verified (connects, stable) |
+| **Camera — rear and front** | ✅ verified (preview + stills) |
+| **Audio — speaker** | ✅ verified |
+| **Bluetooth** | 🟡 enumerates nearby devices; pairing / A2DP audio not yet confirmed |
+| **Brightness** | 🟡 slider works, but the **lower third has little or no effect** — `GSI settings` brightness tweaks did not change it |
+| Video recording | ⚠️ untested |
+| Audio — headphone jack, USB-C, mic | ⚠️ untested |
 | Sensors: accelerometer, gyro, light, proximity | ⚠️ untested |
+| Auto-rotate | ⚠️ untested |
 | Hardware video decode (H.264/HEVC/VP9) | ⚠️ untested — codec list reported by the build looks complete |
-| Screen: brightness, rotation, refresh | ⚠️ untested |
-| Encryption / FBE | ✅ enabled (`ro.crypto.state=encrypted`), full cycle untested |
+| Encryption / FBE | ✅ enabled (`ro.crypto.state=encrypted`), full reboot cycle untested |
 | MTP / USB file transfer | ⚠️ untested |
 | Battery / sleep behaviour | ⚠️ untested |
 | Widevine L3 apps that pin hardware | ⚠️ untested |
 | Play Integrity DEVICE/STRONG | ❌ expected to fail (unlocked bootloader, custom ROM) |
 | Play Protect "certified" banner | ❓ test it — register GSF ID if it complains |
 | Android 16+ | ❌ blocked by vendor API level 31 (needs `202404`) |
+
+Legend: ✅ verified on hardware · 🟡 partially working / partially tested · ⚠️ untested · ❌ known not
+to work. "Verified" means one unit, one report — this is a small project, not a QA lab. Run
+[`TESTING.md`](TESTING.md) and open an issue to move rows. The raw report behind the ✅ rows is in
+[`docs/16-field-test-results.md`](docs/16-field-test-results.md).
+
+**Known issue — minimum brightness.** The bottom third of the brightness curve does very little, so
+the screen does not get as dim as stock. Toggling the GSI brightness settings under
+Settings → Phh Treble Settings did not help. Practical workarounds are a dimming overlay app or
+Night Light; a proper fix would need a device tree (the backlight is controlled through the vendor
+HAL, not something the GSI can recalibrate).
+
 
 Known limitations by design:
 

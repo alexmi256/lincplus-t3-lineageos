@@ -343,8 +343,7 @@ worked. Cause, verified on the device and in the build:
 Combined with a `userdebug` image, `adbd` starts at boot and accepts **any** USB client with no key and
 no prompt — so there was nothing to enable and nothing to approve.
 
-This is inherent to Andy Yan's "Light" GSIs, not something introduced by our rebuild: the A14 image used
-for weeks carries the same pair (`ro.debuggable=1`, `ro.adb.secure=0`).
+This is inherent to Andy Yan's "Light" GSIs, not something introduced by our rebuild: the A14 image carries the same pair (`ro.debuggable=1`, `ro.adb.secure=0`).
 
 Implication: on this image, anyone with a cable and physical access gets a shell, and `adb root` is
 available. For a test unit that is convenient; for a carried daily driver it is a real exposure.
